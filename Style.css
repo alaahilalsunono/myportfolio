@@ -196,7 +196,6 @@ footer {
     filter: blur(18px);
     animation: bgMove 9s ease-in-out infinite alternate;
     z-index: 0;
-    opacity: 0.35;
 }
 
 .hero-section::after {
