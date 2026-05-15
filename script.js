@@ -140,3 +140,57 @@ if (canvas && hero && !prefersReducedMotion) {
     resizeCanvas();
     drawStars();
 }
+const portfolioProjectsGrid =
+    document.getElementById("portfolioProjectsGrid");
+
+async function loadPortfolioProjects() {
+
+    if (!portfolioProjectsGrid) return;
+
+    try {
+
+        const response =
+            await fetch("http://localhost:3000/api/projects");
+
+        const projects = await response.json();
+
+        portfolioProjectsGrid.innerHTML = projects.map(project => `
+
+            <article class="project-card">
+
+                <div class="project-picture"></div>
+
+                <div class="project-info">
+
+                    <span class="project-category">
+                        ${project.category}
+                    </span>
+
+                    <h3>${project.title}</h3>
+
+                    <p>${project.description}</p>
+
+                    <a class="read-more"
+                       href="${project.demo || "#"}"
+                       target="_blank">
+
+                        Read More
+
+                    </a>
+
+                </div>
+
+            </article>
+
+        `).join("");
+
+    } catch (error) {
+
+        console.error(error);
+
+        portfolioProjectsGrid.innerHTML =
+            "<p>Failed to load projects.</p>";
+    }
+}
+
+loadPortfolioProjects();
