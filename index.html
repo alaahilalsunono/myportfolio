@@ -11,26 +11,26 @@
 
 <body>
 
-<header class="site-header">
-    <nav class="navbar" aria-label="Main navigation">
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#resume">Resume</a></li>
+    <header class="site-header">
+<nav class="navbar" aria-label="Main navigation">
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#resume">Resume</a></li>
 
-            <li id="adminNavItem" style="display: none;">
-                <a href="./dashboard.html">Admin</a>
-            </li>
+        <li id="adminNavItem" style="display: none;">
+            <a href="./dashboard.html">Admin</a>
+        </li>
 
-            <li>
-                <a href="./dashboard.html">Dashboard</a>
-            </li>
-        </ul>
-    </nav>
-</header>
+        <li>
+            <a href="./dashboard.html">Dashboard</a>
+        </li>
+    </ul>
+</nav>
+    </header>
 
     <main>
 <section id="home" class="hero-section section-with-content">
@@ -125,47 +125,7 @@
                 <button class="filter-button" type="button">Video Editing</button>
             </div>
 
-            <div class="projects-grid">
-                <article class="project-card">
-                    <div class="project-picture"></div>
-                    <div class="project-info">
-                        <span class="project-category">Web Development</span>
-                        <h3>Personal Portfolio</h3>
-                        <p>A responsive portfolio website with animated sections, dark/light mode support, and a creative identity.</p>
-                        <a class="read-more" href="#">Read more <img src="Icons/arightarrow.svg" alt="" /></a>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-picture"></div>
-                    <div class="project-info">
-                        <span class="project-category">UI/UX Design</span>
-                        <h3>Mobile App Concept</h3>
-                        <p>A clean user interface concept focused on accessibility, simple navigation, and modern visual hierarchy.</p>
-                        <a class="read-more" href="#">Read more <img src="Icons/arightarrow.svg" alt="" /></a>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-picture"></div>
-                    <div class="project-info">
-                        <span class="project-category">Graphic Design</span>
-                        <h3>Brand Identity</h3>
-                        <p>Visual identity design including color palette, typography, social media assets, and layout direction.</p>
-                        <a class="read-more" href="#">Read more <img src="Icons/arightarrow.svg" alt="" /></a>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-picture"></div>
-                    <div class="project-info">
-                        <span class="project-category">Development</span>
-                        <h3>Smart Garden Game</h3>
-                        <p>A Java-based educational game idea combining plant data, prediction logic, and route optimization.</p>
-                        <a class="read-more" href="#">Read more <img src="Icons/arightarrow.svg" alt="" /></a>
-                    </div>
-                </article>
-            </div>
+            <div class="projects-grid" id="portfolioProjectsGrid"></div>
         </section>
 
         <section id="contact" class="contact-section section-with-content reveal-section">
