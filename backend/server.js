@@ -1,54 +1,134 @@
+require("dotenv").config();
+
+const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
+
+const Project = require("./models/Project");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-let projects = [
-  {
-    id: 1,
-    title: "Smart Garden Game",
-    category: "Full Stack",
-    description: "Java AI game with plant prediction and route optimization.",
-    image: "",
-    github: "#",
-    demo: "#"
-  },
-  {
-    id: 2,
-    title: "Personal Portfolio",
-    category: "Frontend",
-    description: "Animated responsive portfolio website.",
-    image: "",
-    github: "#",
-    demo: "#"
-  }
-];
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log("MongoDB connected");
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 
 app.get("/", (req, res) => {
-  res.send("Server is running 🚀");
+    res.send("Server is running 🚀");
 });
 
-app.get("/api/projects", (req, res) => {
-  res.json(projects);
+/* GET ALL PROJECTS */
+app.get("/api/projects", async (req, res) => {
+
+    try {
+
+        const projects =
+            await Project.find().sort({ createdAt: -1 });
+
+        res.json(projects);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: "Failed to get projects",
+            error: error.message
+        });
+    }
 });
 
-app.post("/api/projects", (req, res) => {
-  const newProject = {
-    id: Date.now(),
-    title: req.body.title,
-    category: req.body.category,
-    description: req.body.description,
-    image: req.body.image,
-    github: req.body.github,
-    demo: req.body.demo
-  };
+/* ADD PROJECT */
+app.post("/api/projects", async (req, res) => {
 
-  projects.push(newProject);
+    try {
 
-  res.status(201).json(newProject);
+        const newProject =
+            await Project.create({
+
+                title: req.body.title,
+                category: req.body.category,
+                description: req.body.description,
+                image: req.body.image,
+                github: req.body.github,
+                demo: req.body.demo
+            });
+
+        res.status(201).json(newProject);
+
+    } catch (error) {
+
+        res.status(400).json({
+            message: "Failed to add project",
+            error: error.message
+        });
+    }
+});
+
+/* UPDATE PROJECT */
+app.put("/api/projects/:id", async (req, res) => {
+
+    try {
+
+        const updatedProject =
+            await Project.findByIdAndUpdate(
+
+                req.params.id,
+                req.body,
+                {
+                    new: true,
+                    runValidators: true
+                }
+            );
+
+        if (!updatedProject) {
+
+            return res.status(404).json({
+                message: "Project not found"
+            });
+        }
+
+        res.json(updatedProject);
+
+    } catch (error) {
+
+        res.status(400).json({
+            message: "Failed to update project",
+            error: error.message
+        });
+    }
+});
+
+/* DELETE PROJECT */
+app.delete("/api/projects/:id", async (req, res) => {
+
+    try {
+
+        const deletedProject =
+            await Project.findByIdAndDelete(req.params.id);
+
+        if (!deletedProject) {
+
+            return res.status(404).json({
+                message: "Project not found"
+            });
+        }
+
+        res.json({
+            message: "Project deleted successfully"
+        });
+
+    } catch (error) {
+
+        res.status(400).json({
+            message: "Failed to delete project",
+            error: error.message
+        });
+    }
 });
 
 app.listen(5050, () => {
