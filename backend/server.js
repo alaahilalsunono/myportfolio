@@ -51,6 +51,6 @@ app.post("/api/projects", (req, res) => {
   res.status(201).json(newProject);
 });
 
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+app.listen(5050, () => {
+    console.log("Server running on http://localhost:5050");
 });
